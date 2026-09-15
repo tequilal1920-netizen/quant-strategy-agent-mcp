@@ -1,0 +1,23 @@
+{
+  "schema_version": "quant-agent-public-files/1",
+  "files": [
+    "README.md",
+    "PROTOCOL.md",
+    "PUBLIC_FILES.json",
+    ".gitignore",
+    "install.ps1",
+    "install.sh",
+    "requirements-windows.lock",
+    "quant_agent_mcp/pyproject.toml",
+    "quant_agent_mcp/server.py",
+    "quant_agent_mcp/quant_agent_mcp/__init__.py",
+    "quant_agent_mcp/quant_agent_mcp/config.py",
+    "quant_agent_mcp/quant_agent_mcp/credentials.py",
+    "quant_agent_mcp/quant_agent_mcp/client.py",
+    "quant_agent_mcp/quant_agent_mcp/server.py",
+    "quant_agent_mcp/quant_agent_mcp/device_bridge.py",
+    "quant_agent_mcp/quant_agent_mcp/cli.py",
+    "quant_agent_mcp/tests/test_client.py",
+    "quant_agent_mcp/tests/test_device_bridge.py"
+  ]
+}
