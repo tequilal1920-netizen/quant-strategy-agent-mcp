@@ -75,8 +75,12 @@ try {
             throw "Python installer signature verification failed; nothing was executed."
         }
         $RuntimeDir = Join-Path $ResolvedInstall "runtime"
-        $Arguments = @("/quiet", "InstallAllUsers=0", 'TargetDir="' + $RuntimeDir + '"',
-            "PrependPath=0", "Include_launcher=0", "Include_test=0", "Include_doc=0", "AssociateFiles=0", "Shortcuts=0")
+        # Start-Process joins an argument array using legacy Windows quoting rules.
+        # Passing TargetDir="..." as one array element inserts spaces inside the
+        # value (TargetDir=" C:\... "), which makes the official MSI fail with
+        # error 1606. Supply one complete native command line so the quoted path
+        # is preserved exactly, including when InstallDir itself contains spaces.
+        $Arguments = '/quiet InstallAllUsers=0 TargetDir="{0}" PrependPath=0 Include_launcher=0 Include_test=0 Include_doc=0 AssociateFiles=0 Shortcuts=0' -f $RuntimeDir
         $InstallProcess = Start-Process -FilePath $Installer -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden
         if ($InstallProcess.ExitCode -notin @(0, 3010)) { throw "Python installation failed. Install Python from python.org and rerun with -Python." }
         $SelectedPython = Test-ClientPython (Join-Path $RuntimeDir "python.exe")
